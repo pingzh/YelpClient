@@ -22,7 +22,6 @@ class Images {
         
         if let image = self.imageCache[imageUrl] {
             uiImageView.image = image
-            print("using cache")
             return
         }
         
