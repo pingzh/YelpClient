@@ -20,6 +20,7 @@
 		EC5D9E8B1BE2DF3E0092A0B0 /* stars_large_4.png in Resources */ = {isa = PBXBuildFile; fileRef = EC5D9E8A1BE2DF3E0092A0B0 /* stars_large_4.png */; };
 		EC5D9E8D1BE2DF910092A0B0 /* try.png in Resources */ = {isa = PBXBuildFile; fileRef = EC5D9E8C1BE2DF910092A0B0 /* try.png */; };
 		EC5D9E8F1BE2E01B0092A0B0 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D9E8E1BE2E01B0092A0B0 /* TableViewController.swift */; };
+		EC5D9E921BE5066D0092A0B0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5D9E911BE5066D0092A0B0 /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		EC5D9E8A1BE2DF3E0092A0B0 /* stars_large_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stars_large_4.png; sourceTree = "<group>"; };
 		EC5D9E8C1BE2DF910092A0B0 /* try.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = try.png; sourceTree = "<group>"; };
 		EC5D9E8E1BE2E01B0092A0B0 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		EC5D9E911BE5066D0092A0B0 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				EC5D9E8C1BE2DF910092A0B0 /* try.png */,
 				EC5D9E8A1BE2DF3E0092A0B0 /* stars_large_4.png */,
 				222D8A5E19CCF9F900D2DB53 /* Main.storyboard */,
+				EC5D9E901BE506580092A0B0 /* Lib */,
 				EC5D9E871BE2D8170092A0B0 /* Cells */,
 				22AAAA9A1AEA0AA100A544AF /* Models */,
 				222D8A7A19CCFAAA00D2DB53 /* API */,
@@ -177,6 +180,14 @@
 				EC5D9E881BE2DBC70092A0B0 /* BusinessesTableViewCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		EC5D9E901BE506580092A0B0 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				EC5D9E911BE5066D0092A0B0 /* Image.swift */,
+			);
+			name = Lib;
 			sourceTree = "<group>";
 		};
 		F4A9A6AAA6A538FE245C4A17 /* Pods */ = {
@@ -343,6 +354,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC5D9E921BE5066D0092A0B0 /* Image.swift in Sources */,
 				22AAAA9C1AEA1EC300A544AF /* BusinessesViewController.swift in Sources */,
 				EC5D9E8F1BE2E01B0092A0B0 /* TableViewController.swift in Sources */,
 				22AAAA991AEA0A9700A544AF /* Business.swift in Sources */,
