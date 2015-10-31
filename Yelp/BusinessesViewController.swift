@@ -55,9 +55,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        if let searchText = searchController.searchBar.text {
+        let searchText = searchController.searchBar.text
+        if searchText != nil && searchText != ""{
             print(searchText)
-            self._search(searchText)
+            self._search(searchText!)
         }
     }
     
@@ -80,10 +81,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.address.text = business.address
         cell.reviewers.text = business.reviewCount?.description
         
-        Images.downloadThumbnailImage(business.imageURL?.description,  uiImageView: cell.thumbnailImageView)
+        if let imageUrl = business.imageURL?.description {
+            Images.downloadThumbnailImage(imageUrl,  uiImageView: cell.thumbnailImageView)
+        }
         
-        Images.downloadThumbnailImage(business.ratingImageURL?.description, uiImageView: cell.ratingImageView)
-        
+        if let ratingImageUrl = business.ratingImageURL?.description {
+            Images.downloadThumbnailImage(ratingImageUrl, uiImageView: cell.ratingImageView)
+        }
         
         return cell
     }

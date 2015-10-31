@@ -44,8 +44,8 @@
                                                         <constraint firstAttribute="width" constant="84" id="xFZ-RA-6Kv"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is5-ci-GaE">
-                                                    <rect key="frame" x="116" y="8" width="78.5" height="22"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="is5-ci-GaE">
+                                                    <rect key="frame" x="116" y="8" width="50.5" height="22"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="240" id="3JA-MM-Ecu"/>
                                                         <constraint firstAttribute="height" constant="22" id="7Td-J1-JgQ"/>
@@ -60,7 +60,10 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg2-jg-pNe">
-                                                    <rect key="frame" x="527.5" y="8" width="56.5" height="17"/>
+                                                    <rect key="frame" x="534" y="8" width="50" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="F21-RV-xiK"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
