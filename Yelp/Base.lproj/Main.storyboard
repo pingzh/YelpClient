@@ -149,11 +149,53 @@
                     <navigationItem key="navigationItem" id="Sck-DN-GGS"/>
                     <connections>
                         <outlet property="tableView" destination="Jr0-xC-zLp" id="pJf-nu-vDM"/>
+                        <segue destination="3Ld-1l-fnS" kind="presentation" identifier="BusinessesToFilter" id="QEm-jp-Ixp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2534" y="275"/>
+        </scene>
+        <!--Filter-->
+        <scene sceneID="ihw-UC-5EY">
+            <objects>
+                <viewController id="wD0-gr-cai" customClass="FilterViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PR7-lZ-kDS"/>
+                        <viewControllerLayoutGuide type="bottom" id="xMi-PF-8ao"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kly-jJ-wO2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="L0r-Ym-23J">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="L0r-Ym-23J" secondAttribute="trailing" constant="-20" id="Ck1-yv-wNA"/>
+                            <constraint firstItem="L0r-Ym-23J" firstAttribute="top" secondItem="Kly-jJ-wO2" secondAttribute="topMargin" id="Ftw-pz-7oq"/>
+                            <constraint firstItem="L0r-Ym-23J" firstAttribute="leading" secondItem="Kly-jJ-wO2" secondAttribute="leadingMargin" constant="-20" id="R2B-Eb-UeC"/>
+                            <constraint firstItem="xMi-PF-8ao" firstAttribute="top" secondItem="L0r-Ym-23J" secondAttribute="bottom" id="V6K-on-4bJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Filter" id="EiU-Mx-c40">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="Ia5-EO-5YP">
+                            <connections>
+                                <action selector="cancelButtonAction:" destination="wD0-gr-cai" id="k6Z-6g-g9V"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="vqU-yo-mV0"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="L0r-Ym-23J" id="Y5B-6A-j3U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xDK-MI-iYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3787" y="275"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qMl-T2-kZt">
@@ -172,6 +214,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kqn-ld-QQA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1898" y="275"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="42S-jt-tVZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Ld-1l-fnS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9ei-36-gEX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wD0-gr-cai" kind="relationship" relationship="rootViewController" id="qX2-bl-XB9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g1k-Zd-9Ej" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3156" y="275"/>
         </scene>
     </scenes>
     <resources>

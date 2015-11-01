@@ -8,13 +8,9 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UIScrollViewDelegate {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UIScrollViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    
-    var filteredBusinesses: [Business] = []
-    
     
     var searchController: UISearchController!
     var businesses: [Business] = []
@@ -27,31 +23,27 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         self._search()
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        if scrollView.contentOffset.y + self.tableView.frame.size.height > scrollView.contentSize.height * 0.8 {
-//            self._search()
-//        }
+    
+    func showFilter() {
+        self.performSegueWithIdentifier("BusinessesToFilter", sender: self)
     }
     
-    func _setupTableView() {
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
 
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 150
-    }
-    
+/**** UISearchController ****/
     func _setupSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "Restaurants"
+        //this is used to cancel button
+        searchController.searchBar.delegate = self
         
         navigationItem.titleView = searchController.searchBar
         searchController.hidesNavigationBarDuringPresentation = false
-//        
-//        let leftBarItem = UIBarButtonItem(title: "Menu", style: .Plain, target: self, action: Selector("showMenu"))
-//        navigationItem.leftBarButtonItem = leftBarItem
+        
+        let leftBarItem = UIBarButtonItem(title: "Filter", style: .Plain, target: self, action: Selector("showFilter"))
+        navigationItem.leftBarButtonItem = leftBarItem
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
@@ -62,6 +54,21 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self._search()
+    }
+/**** End UISearchController ****/
+
+     
+/**** UITableView ****/
+    func _setupTableView() {
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 150
+    }
+
 
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
@@ -91,6 +98,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         
         return cell
     }
+    
+/**** End UITableView ****/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
