@@ -14,7 +14,7 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     
     let HeaderViewIdentifier = "TableViewHeaderView"
     
-    var selectedSection: [Bool] = []
+    var sectionSelected: [Bool] = []
     
     
     @IBAction func cancelButtonAction(sender: UIBarButtonItem) {
@@ -23,14 +23,12 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self._setupTableView()
-        self.selectedSection = [Bool] (count: FilterSection.filters.count, repeatedValue: false)
+        self.sectionSelected = [Bool] (count: FilterSection.filters.count, repeatedValue: false)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
@@ -38,9 +36,6 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     func _setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        //self.tableView.rowHeight = UITableViewAutomaticDimension
-        //self.tableView.estimatedRowHeight = 150
         self.tableView.registerClass(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: HeaderViewIdentifier)
     }
     
@@ -53,13 +48,7 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if self.selectedSection[section] {
-            return FilterSection.filters[section].options.count
-        }
-        else {
-            return FilterSection.filters[section].displayItems
-        }
+        return self._getNumberOfSection(section)
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -73,7 +62,7 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         if FilterSection.filters[section].header == "" {
             return 0
         }
-        return 30
+        return 40
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -107,34 +96,55 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        self.selectedSection[indexPath.section] = !self.selectedSection[indexPath.section]
+        self.sectionSelected[indexPath.section] = !self.sectionSelected[indexPath.section]
         
         let filter = FilterSection.filters[indexPath.section]
         let selectedOptions = filter.options
         
-        if indexPath.section != 0 && indexPath.section != FilterSection.filters.count - 1 && indexPath.row != 0 {
-            let selectedOption = selectedOptions[indexPath.row]
-            selectedOptions[0].name = selectedOption.name
-            selectedOptions[0].value = selectedOption.value
-            
-            for option in selectedOptions {
-                option.selected = false
-            }
-            selectedOption.selected = true
-        }
-        
-        if indexPath.section == FilterSection.filters.count - 1 && indexPath.row == 0 {
-            if filter.options[0].name == "Collapse" {
-               filter.options[0].name = "See All"
+        if indexPath.section != 0 && indexPath.section != FilterSection.filters.count - 1 {
+            if indexPath.row != 0 {
+                let selectedOption = selectedOptions[indexPath.row]
+                selectedOptions[0].name = selectedOption.name
+                selectedOptions[0].value = selectedOption.value
+                
+                for option in selectedOptions {
+                    option.selected = false
+                }
+                selectedOption.selected = true
+                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             }
             else {
-                filter.options[0].name = "Collapse"
+                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             }
         }
-        
-        self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+        else if indexPath.section == FilterSection.filters.count - 1 {
+            if indexPath.row == 0 {
+                if filter.options[0].name == "Collapse" {
+                    filter.options[0].name = "See All"
+                }
+                else {
+                    filter.options[0].name = "Collapse"
+                }
+                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            }
+        }
+        else {
+            self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+        }
     }
     
     
 /**** End UITableView ****/
+    
+/**** Private Functions ****/
+    func _getNumberOfSection(section: Int) -> Int {
+        if self.sectionSelected[section] {
+            return FilterSection.filters[section].options.count
+        }
+        else {
+            return FilterSection.filters[section].displayItems
+        }
+    }
+
+
 }
