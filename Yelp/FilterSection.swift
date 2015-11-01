@@ -14,7 +14,7 @@ class FilterSection {
             header: "",
             name: "deals_filter",
             options: [
-                Option(name: "Offering a Deal", value: true, selected: true)
+                Option(name: "Offering a Deal", value: true, selected: false)
             ],
             type: FilterType.Zero,
             displayItems: 1
@@ -37,9 +37,9 @@ class FilterSection {
             header: "Sort By",
             name: "sort",
             options: [
-                Option(name: "Default", value: 0),
-                Option(name: "Best Match", value: 0, selected: true),
-                Option(name: "Distance", value: 1),
+                Option(name: "Default", value: 1),
+                Option(name: "Best Match", value: 0),
+                Option(name: "Distance", value: 1, selected: true),
                 Option(name: "Rating", value: 2)
             ],
             type: FilterType.Single,

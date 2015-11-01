@@ -14,6 +14,18 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var searchController: UISearchController!
     var businesses: [Business] = []
+    var searchString: String = "Restaurants"
+    
+    @IBAction func saveFilterResult(segue:UIStoryboardSegue) {
+        let filterViewController = segue.sourceViewController as! FilterViewController
+        self._search(
+            self.searchString,
+            sort: filterViewController.sort,
+            radius_filter: filterViewController.radius_filter,
+            categories: Array(filterViewController.category_filter),
+            deals: filterViewController.deals_filter
+        )
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +34,6 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         self._setupTableView()
         self._search()
     }
-    
     
     func showFilter() {
         //the line below it is very important
@@ -94,6 +105,7 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.distance.text = business.distance
         cell.address.text = business.address
         cell.reviewers.text = business.reviewCount?.description
+        cell.category.text = business.categories
         
         if let imageUrl = business.imageURL?.description {
             Images.downloadThumbnailImage(imageUrl,  uiImageView: cell.thumbnailImageView)
@@ -112,23 +124,13 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         super.didReceiveMemoryWarning()
     }
     
-    func _search(keyword: String = "Restaurants") {
-        Business.searchWithTerm(keyword, sort: .Distance, categories: nil, deals: nil) { (businesses: [Business]!, error: NSError!) -> Void in
+    func _search(keyword: String = "Restaurants", sort: Int = 1, radius_filter: Double = 1.0, categories: [String] = [], deals: Bool = false) {
+        let sortModel = YelpSortMode(rawValue: sort)
+        Business.searchWithTerm(keyword, sort: sortModel, radius_filter: radius_filter, categories: categories, deals: deals) { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
             self.tableView.reloadData()
         }
     }
 }
 
-
-//        Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
-//            self.businesses = businesses
-//
-//            for business in businesses {
-//                println(business.name!)
-//                println(business.address!)
-//            }
-//        })
-
-//
 

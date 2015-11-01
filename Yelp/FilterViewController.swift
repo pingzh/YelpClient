@@ -13,9 +13,12 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     
     let HeaderViewIdentifier = "TableViewHeaderView"
-    
     var sectionSelected: [Bool] = []
     
+    var deals_filter = false
+    var radius_filter = 1.0
+    var sort = 1
+    var category_filter  = Set<String>()
     
     @IBAction func cancelButtonAction(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -104,6 +107,17 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         if let indexPath = self.tableView.indexPathForCell(cell) {
             let selectedOption = FilterSection.filters[indexPath.section].options[indexPath.row]
             selectedOption.selected = uiSwitch.on
+            if indexPath.section == 0 {
+                self.deals_filter = !self.deals_filter
+            }
+            else {
+                if selectedOption.selected {
+                    self.category_filter.insert(selectedOption.value as! String)
+                }
+                else {
+                    self.category_filter.remove(selectedOption.value as! String)
+                }
+            }
         }
     }
     
@@ -124,8 +138,15 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 selectedOption.selected = true
             }
-            self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             
+            if filter.header == "Distance" {
+                self.radius_filter = selectedOption.value as! Double
+            }
+            else if filter.header == "Sort By" {
+                self.sort = selectedOption.value as! Int
+            }
+            
+            self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
         }
         else if indexPath.section == FilterSection.filters.count - 1 {
             if indexPath.row == 0 {
@@ -156,6 +177,4 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
             return FilterSection.filters[section].displayItems
         }
     }
-
-
 }
