@@ -87,11 +87,24 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         }
         else {
             if indexPath.section != FilterSection.filters.count - 1 || indexPath.row != 0 {
-                cell.accessoryView = UISwitch()
+                let uiSwitch = UISwitch()
+                if option.selected {
+                    uiSwitch.setOn(true, animated: false)
+                }
+                uiSwitch.addTarget(self, action: "_changeSwitchValue:", forControlEvents: UIControlEvents.ValueChanged)
+                cell.accessoryView = uiSwitch
             }
         }
         cell.selectionStyle = .None
         return cell
+    }
+    
+    func _changeSwitchValue(uiSwitch: UISwitch) {
+        let cell = uiSwitch.superview as! UITableViewCell
+        if let indexPath = self.tableView.indexPathForCell(cell) {
+            let selectedOption = FilterSection.filters[indexPath.section].options[indexPath.row]
+            selectedOption.selected = uiSwitch.on
+        }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -100,10 +113,9 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         
         let filter = FilterSection.filters[indexPath.section]
         let selectedOptions = filter.options
-        
+        let selectedOption = selectedOptions[indexPath.row]
         if indexPath.section != 0 && indexPath.section != FilterSection.filters.count - 1 {
             if indexPath.row != 0 {
-                let selectedOption = selectedOptions[indexPath.row]
                 selectedOptions[0].name = selectedOption.name
                 selectedOptions[0].value = selectedOption.value
                 
@@ -111,11 +123,9 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
                     option.selected = false
                 }
                 selectedOption.selected = true
-                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             }
-            else {
-                self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
-            }
+            self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
+            
         }
         else if indexPath.section == FilterSection.filters.count - 1 {
             if indexPath.row == 0 {
@@ -124,6 +134,7 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
                 }
                 else {
                     filter.options[0].name = "Collapse"
+                    selectedOption.selected = true
                 }
                 self.tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: UITableViewRowAnimation.Fade)
             }
