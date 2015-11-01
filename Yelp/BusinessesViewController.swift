@@ -25,6 +25,8 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     
     func showFilter() {
+        //the line below it is very important
+        self.dismissViewControllerAnimated(true, completion: nil)
         self.performSegueWithIdentifier("BusinessesToFilter", sender: self)
     }
     
@@ -54,7 +56,12 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.searchBarCancelButtonClicked(searchController.searchBar)
+    }
+    
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchController.searchBar.showsCancelButton = false
         self._search()
     }
 /**** End UISearchController ****/
