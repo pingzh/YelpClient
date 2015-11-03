@@ -24,7 +24,7 @@ Note: Please open `Yelp.xcworkspace`
 - [x] Optional: Categories shows a subset of the full list with a "See All" row to expand.
     
 ### Problem:
-- [x] It seems search radius_filter not work as properly, even though I pass raduis_filter into Yelp Api
+- It seems search radius_filter not work as properly, even though I pass raduis_filter into Yelp Api
     
 ## Gif walkthrough:
 
