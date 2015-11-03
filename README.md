@@ -37,7 +37,7 @@ Note: Please open `Yelp.xcworkspace`
     
 ## Gif walkthrough:
 
-![alt tag](https://github.com/pingzh/RottenTomatoes/blob/master/RottenTomatoes/MobileTrainingAssignmentOne__Ping_Zhang.gif)
+![alt tag](https://github.com/pingzh/YelpClient/blob/master/MobileTrainingAssignmentTwo__Ping_Zhang2.gif)
 
 # Credits
 - [GIF created with LiceCap] (http://www.cockos.com/licecap/)
