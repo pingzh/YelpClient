@@ -1,12 +1,13 @@
 # YelpClient
 Mobile Training Assignment Two
 
-- Written in Swift
+- Written in Swift2
 - Xcode: 7.1
 - Mac OS: 10.10.5
+- CocoaPods: 0.39.0
 - Hours: 8 hours
 
-Note: Please open `Yelp.xcworkspace`
+Note: Be sure to run `pod install` and then open `Yelp.xcworkspace`
 
 ## Features
 
